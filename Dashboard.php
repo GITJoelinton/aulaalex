@@ -14,8 +14,9 @@ if (!isset($_SESSION['user_id'])) {
   <link rel="stylesheet" href="styles2.css">
 </head>
 <body>
-    <h1>Bem-vindo ao Dashboard</h1>
+    <h1>Bem-vindo <?php echo $_SESSION['username']; ?>!</h1>
     <p>Você está logado com sucesso!</p>
+    <a href="desconectar.php">Sair</a>
 </body>
 </html>
 

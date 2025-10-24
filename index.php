@@ -7,7 +7,7 @@ $usuario = $_POST['username'];
 $senha = $_POST['password'];
 $sql = "INSERT INTO users (username, senha) VALUES ('$usuario','$senha')";
 if ($conn->query($sql) === TRUE) {
-    echo "Cadastro realizado com sucesso! <a href='../front/login.html'> Fazer login</a>";
+    echo "Cadastro realizado com sucesso! <a href=login.html'> Fazer login</a>";
 } else {
     echo "Erro ao cadastrar: " . $conn->error;
 }

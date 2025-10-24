@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
        
     } else {
-        echo "Usuário ou senha incorretos. <a href='../front/login.html'>Tentar novamente</a>";
+        echo "Usuário ou senha incorretos. <a href='login.html'>Tentar novamente</a>";
     }
 };
 

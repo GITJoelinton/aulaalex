@@ -1,5 +1,9 @@
 <?php
-$conn = new mysqli('sql213.byetcluster.com', 'if0_40124930', '1540867234', 'if0_40124930_logins');
+$host='sql213.byetcluster.com';
+$user='if0_40124930';
+$pass='1540867234';
+$db='if0_40124930_logins';
+$conn = new mysqli($host, $user, $pass, $db);
 if ($conn->connect_error) {
     die("erro de conexão: " . $conn->connect_error);
 }

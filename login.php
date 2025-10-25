@@ -1,5 +1,7 @@
 <?php
-session_start();
+error_reporting(
+E_ALL);
+ini_set('display_errors', 1);
 $host = 'sql100.byetcluster.com';
 $dbname = 'icei_40249526_trabalho';
 $user = 'icei_40249526';

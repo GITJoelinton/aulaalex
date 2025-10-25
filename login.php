@@ -1,7 +1,7 @@
 <?php
- $host = 'sql300.byetcluster.com';
-	 $dbname = 'if0_40124646_joelinto';
-	$user = 'if0_40124646';
+   $host = 'sql100.byetcluster.com';
+	 $dbname = 'icei_40249526_trabalho';
+	$user = 'icei_40249526';
 	 $pass = 'joel1240';
 $conn = new mysqli($host, $user, $pass, $db);
 if ($conn->connect_error) {

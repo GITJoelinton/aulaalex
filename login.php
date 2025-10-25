@@ -1,10 +1,8 @@
 <?php
-error_reporting(
-E_ALL);
-ini_set('display_errors', 1);
-$host = 'sql100.byetcluster.com';
-$dbname = 'icei_40249526_trabalho';
-$user = 'icei_40249526';
+session_start();
+$host = 'sql308.byetcluster.com';
+$dbname = 'if0_40249420_trabalho';
+$user = 'if0_40249420';
 $pass = 'joel1240';
 
 $conn = new mysqli($host, $user, $pass, $dbname);

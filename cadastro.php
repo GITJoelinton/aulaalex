@@ -1,5 +1,6 @@
 <?php
-session_start();
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 $host = 'sql308.byetcluster.com';
 $dbname = 'if0_40249420_trabalho';
 $user = 'if0_40249420';

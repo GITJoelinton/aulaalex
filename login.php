@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 session_start();
 $host = 'sql308.byetcluster.com';
 $dbname = 'if0_40249420_trabalho';

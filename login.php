@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 $host = 'sql213.byetcluster.com';
@@ -23,19 +22,15 @@ if ($stmt->num_rows > 0) {
     $stmt->fetch();
     if (password_verify($password, $hashed_password)) {
         $_SESSION['username'] = $username;
-        $stmt->close();
-        $conn->close();
         header("Location: dashboard.php");
         exit();
     } else {
-        $stmt->close();
-        $conn->close();
-        die("Senha incorreta. <a href='login.html'>Tentar novamente</a>");
+        echo "Senha incorreta. <a href='login.html'>Tentar novamente</a>";
     }
 } else {
-    $stmt->close();
-    $conn->close();
-    die("Usuário não encontrado. <a href='login.html'>Tentar novamente</a>");
+    echo "Usuário não encontrado. <a href='login.html'>Tentar novamente</a>";
 }
 
+$stmt->close();
+$conn->close();
 ?>

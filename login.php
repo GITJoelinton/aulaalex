@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 $host = 'sql213.byetcluster.com';
 $dbname = 'if0_40124930_logins';
 $user = 'if0_40124930';
@@ -12,14 +11,15 @@ if ($conn->connect_error) die("Erro de conexão: " . $conn->connect_error);
 $username = $_POST['username'] ?? '';
 $password = $_POST['password'] ?? '';
 
-$stmt = $conn->prepare("SELECT senha FROM users WHERE username=?");
-$stmt->bind_param("s", $username);
-$stmt->execute();
-$stmt->store_result();
+$username_safe = $conn->real_escape_string($username);
 
-if ($stmt->num_rows > 0) {
-    $stmt->bind_result($hashed_password);
-    $stmt->fetch();
+$sql = "SELECT senha FROM usuarios WHERE username = '$username_safe'";
+$resultado = $conn->query($sql);
+
+if ($resultado && $resultado->num_rows > 0) {
+    $linha = $resultado->fetch_assoc();
+    $hashed_password = $linha['senha'];
+
     if (password_verify($password, $hashed_password)) {
         $_SESSION['username'] = $username;
         header("Location: dashboard.php");
@@ -31,6 +31,5 @@ if ($stmt->num_rows > 0) {
     echo "Usuário não encontrado. <a href='login.html'>Tentar novamente</a>";
 }
 
-$stmt->close();
 $conn->close();
 ?>

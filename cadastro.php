@@ -13,7 +13,7 @@ $password = $_POST['password'] ?? '';
 
 if ($username && $password) {
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
-    $stmt = $conn->prepare("INSERT INTO users (username, senha) VALUES (?, ?)");
+    $stmt = $conn->prepare("INSERT INTO usuarios (username, senha) VALUES (?, ?)");
     $stmt->bind_param("ss", $username, $password_hash);
     if ($stmt->execute()) {
         echo "Cadastro realizado! <a href='login.html'>Login</a>";

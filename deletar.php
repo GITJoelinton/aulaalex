@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($id)) {
         echo "ID inválido.";
     } else {
-        $sql = "DELETE FROM users WHERE id='$id'";
+        $sql = "DELETE FROM usuarios WHERE id='$id'";
         if ($conn->query($sql) === TRUE) {
             echo "Usuário excluído com sucesso.";
         } else {

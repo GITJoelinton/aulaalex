@@ -13,6 +13,12 @@ if (!isset($_SESSION['username'])) {
 </head>
 <body>
     <h1>Bem-vindo, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h1>
-    <p><a href="desconectar.php">Sair</a></p>
+    
+    <h2>Opções:</h2>
+    <ul>
+        <li><a href="atualizar.html">Atualizar usuário e senha</a></li>
+        <li><a href="deletar.html">Deletar usuário</a></li>
+        <li><a href="desconectar.php">Sair</a></li>
+    </ul>
 </body>
 </html>

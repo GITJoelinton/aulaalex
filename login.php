@@ -1,11 +1,10 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+
 session_start();
-$host = 'sql308.byetcluster.com';
-$dbname = 'if0_40249420_trabalho';
-$user = 'if0_40249420';
-$pass = 'joel1240';
+$host = 'sql213.byetcluster.com';
+$dbname = 'if0_40124930_logins';
+$user = 'if0_40124930';
+$pass = '1540867234';
 
 $conn = new mysqli($host, $user, $pass, $dbname);
 if ($conn->connect_error) die("Erro de conexão: " . $conn->connect_error);

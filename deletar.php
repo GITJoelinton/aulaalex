@@ -11,17 +11,36 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = $_POST['id'] ?? '';
+    $username = $_POST['username'] ?? '';
+    $password = $_POST['password'] ?? '';
 
-    if (empty($id)) {
-        echo "ID inválido.";
-    } else {
-        $sql = "DELETE FROM usuarios WHERE id='$id'";
-        if ($conn->query($sql) === TRUE) {
-            echo "Usuário excluído com sucesso.";
+    if (empty($username) || empty($password)) {
+        echo "Usuário e senha são obrigatórios para exclusão.";
+        exit();
+    }
+
+    $username_safe = $conn->real_escape_string($username);
+    $sql_select = "SELECT id, senha FROM usuarios WHERE username = '$username_safe'";
+    $resultado = $conn->query($sql_select);
+
+    if ($resultado && $resultado->num_rows > 0) {
+        $linha = $resultado->fetch_assoc();
+        $user_id = $linha['id'];
+        $hashed_password = $linha['senha'];
+
+        if (password_verify($password, $hashed_password)) {
+            
+            $sql_delete = "DELETE FROM usuarios WHERE id=$user_id";
+            if ($conn->query($sql_delete) === TRUE) {
+                echo "Usuário excluído com sucesso.";
+            } else {
+                echo "Erro ao excluir usuário: " . $conn->error;
+            }
         } else {
-            echo "Erro ao excluir usuário: " . $conn->error;
+            echo "Senha incorreta.";
         }
+    } else {
+        echo "Usuário não encontrado.";
     }
 }
 

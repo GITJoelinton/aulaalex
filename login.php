@@ -11,17 +11,16 @@ if ($conn->connect_error) die("Erro de conexão: " . $conn->connect_error);
 $username = $_POST['username'] ?? '';
 $password = $_POST['password'] ?? '';
 
-$username_safe = $conn->real_escape_string($username);
+$stmt = $conn->prepare("SELECT id, senha FROM usuarios WHERE username = ?");
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$result = $stmt->get_result();
 
-$sql = "SELECT senha FROM usuarios WHERE username = '$username_safe'";
-$resultado = $conn->query($sql);
-
-if ($resultado && $resultado->num_rows > 0) {
-    $linha = $resultado->fetch_assoc();
-    $hashed_password = $linha['senha'];
-
-    if (password_verify($password, $hashed_password)) {
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    if (password_verify($password, $row['senha'])) {
         $_SESSION['username'] = $username;
+        $_SESSION['user_id'] = $row['id'];
         header("Location: dashboard.php");
         exit();
     } else {
@@ -31,5 +30,6 @@ if ($resultado && $resultado->num_rows > 0) {
     echo "Usuário não encontrado. <a href='login.html'>Tentar novamente</a>";
 }
 
+$stmt->close();
 $conn->close();
 ?>

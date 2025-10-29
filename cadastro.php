@@ -1,5 +1,4 @@
 <?php
-session_start();
 $host = 'sql213.byetcluster.com';
 $dbname = 'if0_40124930_logins';
 $user = 'if0_40124930';
@@ -12,14 +11,24 @@ $username = $_POST['username'] ?? '';
 $password = $_POST['password'] ?? '';
 
 if ($username && $password) {
-    $password_hash = password_hash($password, PASSWORD_DEFAULT);
-    $stmt = $conn->prepare("INSERT INTO usuarios (username, senha) VALUES (?, ?)");
-    $stmt->bind_param("ss", $username, $password_hash);
-    if ($stmt->execute()) {
-        echo "Cadastro realizado! <a href='login.html'>Login</a>";
+    // Verifica se usuário já existe
+    $check = $conn->prepare("SELECT id FROM usuarios WHERE username = ?");
+    $check->bind_param("s", $username);
+    $check->execute();
+    if ($check->get_result()->num_rows > 0) {
+        echo "Usuário já existe!";
     } else {
-        echo "Erro: " . $conn->error;
+        $password_hash = password_hash($password, PASSWORD_DEFAULT);
+        $stmt = $conn->prepare("INSERT INTO usuarios (username, senha) VALUES (?, ?)");
+        $stmt->bind_param("ss", $username, $password_hash);
+        if ($stmt->execute()) {
+            echo "Cadastro realizado! <a href='login.html'>Fazer login</a>";
+        } else {
+            echo "Erro: " . $conn->error;
+        }
+        $stmt->close();
     }
+    $check->close();
 }
 $conn->close();
 ?>

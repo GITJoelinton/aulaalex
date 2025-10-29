@@ -6,13 +6,16 @@
 </head>
 <body>
   <h1>Excluir Conta</h1>
+  <p><strong>Atenção:</strong> Esta ação é irreversível!</p>
+  
   <form action="deletar.php" method="post">
     <label>Usuário:</label><br>
     <input type="text" name="username" required><br><br>
     <label>Senha:</label><br>
     <input type="password" name="password" required><br><br>
-    <button type="submit">Excluir Conta</button>
+    <button type="submit">Excluir Conta Permanentemente</button>
   </form>
+  
   <p><a href="dashboard.php">Voltar ao Painel</a></p>
 </body>
 </html>

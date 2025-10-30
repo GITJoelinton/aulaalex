@@ -1,34 +1,42 @@
 <?php
-$host = 'sql213.byetcluster.com';
-$dbname = 'if0_40124930_logins';
-$user = 'if0_40124930';
-$pass = '1540867234';
+require_once "conexao.php";
 
-$conn = new mysqli($host, $user, $pass, $dbname);
-if ($conn->connect_error) die("Erro de conexão: " . $conn->connect_error);
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $username = trim($_POST["username"] ?? "");
+    $senha = trim($_POST["senha"] ?? $_POST["password"] ?? "");
 
-$username = $_POST['username'] ?? '';
-$password = $_POST['password'] ?? '';
-
-if ($username && $password) {
-    // Verifica se usuário já existe
-    $check = $conn->prepare("SELECT id FROM usuarios WHERE username = ?");
+    if (empty($username)) {
+        die("O campo Usuário está vazio.");
+    }
+    if (empty($senha)) {
+        die("O campo Senha está vazio.");
+    }
+    
+    $check = $conn->prepare("SELECT * FROM usuarios WHERE username = ?");
     $check->bind_param("s", $username);
     $check->execute();
-    if ($check->get_result()->num_rows > 0) {
-        echo "Usuário já existe!";
-    } else {
-        $password_hash = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $conn->prepare("INSERT INTO usuarios (username, senha) VALUES (?, ?)");
-        $stmt->bind_param("ss", $username, $password_hash);
-        if ($stmt->execute()) {
-            echo "Cadastro realizado! <a href='login.html'>Fazer login</a>";
-        } else {
-            echo "Erro: " . $conn->error;
-        }
-        $stmt->close();
+    $result = $check->get_result();
+
+    if ($result->num_rows > 0) {
+        die("Usuário já existe. <a href='login_form.php'>Fazer login</a>");
     }
-    $check->close();
+
+    $hash = password_hash($senha, PASSWORD_DEFAULT);
+
+    $stmt = $conn->prepare("INSERT INTO usuarios (username, senha) VALUES (?, ?)");
+    $stmt->bind_param("ss", $username, $hash);
+    $stmt->execute();
+
+    if ($stmt->affected_rows > 0) {
+        echo "Cadastro realizado com sucesso! <a href='login_form.php'>Fazer login</a>";
+    } else {
+        echo "Erro ao cadastrar usuário.";
+    }
+
+    $stmt->close();
+    $conn->close();
+} else {
+    header("Location: cadastro.html");
+    exit;
 }
-$conn->close();
 ?>

@@ -28,7 +28,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->execute();
 
     if ($stmt->affected_rows > 0) {
-        echo "Cadastro realizado com sucesso! <a href='login_form.php'>Fazer login</a>";
+        session_start();
+        $_SESSION["usuario_id"] = $stmt->insert_id;
+        $_SESSION["usuario_nome"] = $username;
+        header("Location: painel.php");
+        exit;
     } else {
         echo "Erro ao cadastrar usuário.";
     }

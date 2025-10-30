@@ -22,16 +22,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION["usuario_id"] = $user["id"];
             $_SESSION["usuario_nome"] = $username;
 
-            header("Location: sucesso.php");
+            
+            header("Location: painel.php");
             exit;
         } else {
-            die("Senha incorreta. <a href='login.html'>Tentar novamente</a>");
+            die("Senha incorreta. <a href='login_form.php'>Tentar novamente</a>");
         }
     } else {
         die("Usuário não encontrado. <a href='cadastro.html'>Criar conta</a>");
     }
 } else {
-    header("Location: login.html");
+    header("Location: login_form.php");
     exit;
 }
 ?>

@@ -54,7 +54,7 @@ if (!in_array($acao, ['editar', 'excluir'])) {
   <p>Insira sua senha atual para prosseguir.</p>
 
   <?php if ($mensagem_erro): ?>
-    <p style="color: red;"><?php echo $mensagem_erro; ?></p>
+    <p><?php echo $mensagem_erro; ?></p>
   <?php endif; ?>
 
   <form method="POST" action="confirmar_senha.php">

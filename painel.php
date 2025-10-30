@@ -7,6 +7,7 @@ if (!isset($_SESSION["usuario_id"])) {
     exit;
 }
 
+
 $id_logado = $_SESSION["usuario_id"];
 $stmt = $conn->prepare("SELECT id, username FROM usuarios WHERE id = ?");
 $stmt->bind_param("i", $id_logado);

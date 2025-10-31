@@ -48,7 +48,9 @@ if (!in_array($acao, ['editar', 'excluir'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Confirmar Senha</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+<div class="container">
 <body>
   <h1>Confirmar Senha para <?php echo $titulo_acao; ?></h1>
   <p>Insira sua senha atual para prosseguir.</p>
@@ -68,4 +70,5 @@ if (!in_array($acao, ['editar', 'excluir'])) {
 
   <p><a href="painel.php">Cancelar e Voltar ao Painel</a></p>
 </body>
+</div>
 </html>

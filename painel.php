@@ -21,8 +21,10 @@ $usuario = $resultado->fetch_assoc();
 <head>
   <meta charset="UTF-8">
   <title>Painel</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="container">
   <h1>Painel do Usuário</h1>
   <p>Bem-vindo, <?php echo htmlspecialchars($_SESSION["usuario_nome"]); ?>!</p>
   <a href="logout.php">Sair</a>
@@ -42,5 +44,6 @@ $usuario = $resultado->fetch_assoc();
     </li>
   </ul>
 
+</div>
 </body>
 </html>

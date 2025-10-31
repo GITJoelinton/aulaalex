@@ -80,8 +80,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Editar Perfil</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="container">
     <h1>Editar Perfil</h1>
     
     <?php echo $mensagem; ?>
@@ -107,5 +109,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </form>
     
     <p><a href="painel.php">Voltar ao Painel</a></p>
+    </div>
 </body>
 </html>

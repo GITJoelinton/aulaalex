@@ -11,7 +11,7 @@
     
     if (isset($_GET['status']) && $_GET['status'] === 'conta_excluida') {
         
-        echo "<p>Sua conta foi excluída com sucesso! Para acessar o sistema, você precisa criar uma nova conta.</p><hr>";
+        echo "<p>Sua conta foi excluída com sucesso! Sinto muito por nao ter lhe agradado desculpe.</p><hr>";
     }
     ?>
     

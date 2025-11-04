@@ -1,17 +1,15 @@
 <?php
 require_once "conexao.php";
-
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = trim($_POST["username"] ?? "");
     $senha = trim($_POST["senha"] ?? $_POST["password"] ?? "");
-
     if (empty($username)) {
         die("O campo Usuário está vazio.");
     }
     if (empty($senha)) {
         die("O campo Senha está vazio.");
     }
-    
+
     $check = $conn->prepare("SELECT * FROM usuarios WHERE username = ?");
     $check->bind_param("s", $username);
     $check->execute();
@@ -36,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
         echo "Erro ao cadastrar usuário.";
     }
-
+    
     $stmt->close();
     $conn->close();
 } else {

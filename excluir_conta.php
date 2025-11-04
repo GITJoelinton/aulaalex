@@ -10,6 +10,7 @@ if (!isset($_SESSION["usuario_id"])) {
 $id_logado = $_SESSION["usuario_id"];
 
 $stmt = $conn->prepare("DELETE FROM usuarios WHERE id = ?");
+
 $stmt->bind_param("i", $id_logado);
 
 if ($stmt->execute()) {

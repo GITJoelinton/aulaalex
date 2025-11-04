@@ -10,11 +10,11 @@
     <?php
     
     if (isset($_GET['status']) && $_GET['status'] === 'conta_excluida') {
-        
+
         echo "<p>Sua conta foi excluída com sucesso! Sinto muito tera que criar outra</p><hr>";
     }
     ?>
-    
+
     <h1>Entrar</h1>
     <form action="login.php" method="post">
         <label>Usuário:</label><br>

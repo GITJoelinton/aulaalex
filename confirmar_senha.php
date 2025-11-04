@@ -1,25 +1,20 @@
 <?php
 session_start();
 require_once "conexao.php";
-
 if (!isset($_SESSION["usuario_id"])) {
     header("Location: login_form.php");
     exit;
 }
-
 $id_logado = $_SESSION["usuario_id"];
 $acao = $_GET['acao'] ?? $_POST['acao'] ?? '';
 $mensagem_erro = '';
-
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['senha_atual'])) {
     $senha_digitada = trim($_POST['senha_atual'] ?? $_POST['password'] ?? "");
-
     $stmt = $conn->prepare("SELECT senha FROM usuarios WHERE id = ?");
     $stmt->bind_param("i", $id_logado);
     $stmt->execute();
     $resultado = $stmt->get_result();
     $usuario = $resultado->fetch_assoc();
-
     if ($usuario && password_verify($senha_digitada, $usuario['senha'])) {
         if ($acao == 'editar') {
             header("Location: editar_perfil.php");
@@ -33,15 +28,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['senha_atual'])) {
     }
     $stmt->close();
 }
-
 $titulo_acao = ($acao == 'editar') ? 'Mudar Usuário/Senha' : 'Excluir Conta';
-
 if (!in_array($acao, ['editar', 'excluir'])) {
     header("Location: painel.php");
     exit;
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -67,7 +59,7 @@ if (!in_array($acao, ['editar', 'excluir'])) {
     <br><br>
     <button type="submit">Continuar</button>
   </form>
-
+  
   <p><a href="painel.php">Cancelar e Voltar ao Painel</a></p>
 </body>
 </div>

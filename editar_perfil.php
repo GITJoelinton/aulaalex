@@ -1,9 +1,8 @@
 <?php
 session_start();
 require_once "conexao.php";
-
 if (!isset($_SESSION["usuario_id"])) {
-    header("Location: login.html");
+    header("Location: login_form.php");
     exit;
 }
 

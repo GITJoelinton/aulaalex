@@ -6,19 +6,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $senha = trim($_POST["senha"] ?? $_POST["password"] ?? "");
 
     if (empty($username)) {
-        die("O campo Usuário está vazio.");
+        echo "O campo Usuário está vazio.";
+        exit;
     }
     if (empty($senha)) {
-        die("O campo Senha está vazio.");
+        echo "O campo Senha está vazio.";
+        exit;
     }
-    
+
     $check = $conn->prepare("SELECT * FROM usuarios WHERE username = ?");
     $check->bind_param("s", $username);
     $check->execute();
     $result = $check->get_result();
 
     if ($result->num_rows > 0) {
-        die("Usuário já existe. <a href='login_form.php'>Fazer login</a>");
+        echo "Usuário já existe. <a href='login_form.php'>Fazer login</a>";
+        exit;
     }
 
     $hash = password_hash($senha, PASSWORD_DEFAULT);

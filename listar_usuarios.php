@@ -33,7 +33,7 @@ $stmt->close();
     <div class="container">
         <h1>Lista de Usuários Cadastrados</h1>
         <p>Bem-vindo, <?php echo htmlspecialchars($_SESSION["usuario_nome"]); ?>!</p>
-        <p class="mensagem erro">Aviso: A exibição de senhas (hasheadas) é apenas para fins didáticos. Em produção, nunca exiba senhas, mesmo hasheadas, por motivos de segurança.</p>
+        <p class="mensagem erro">Aviso:A lista de usuarios e somente para trabalhos de estudo jamais faça isso mesmo que os dados estejam criptografados.</p>
         <a href="painel.php">Voltar ao Painel</a>
         <hr>
 

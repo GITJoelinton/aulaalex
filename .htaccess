@@ -1,0 +1,13 @@
+# .htaccess para htdocs - Sobrescreve regras globais do InfinityFree
+RewriteEngine On
+DirectoryIndex index.php index.html
+
+# Permite acesso a todos os arquivos PHP (evita 403 em páginas como listar_usuarios.php)
+<FilesMatch "\.(php|html)$">
+Order Allow,Deny
+Allow from all
+</FilesMatch>
+
+# Opcional: Redireciona para HTTPS (se quiser ativar SSL)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
